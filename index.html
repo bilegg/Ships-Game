@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Mali" rel="stylesheet">
+    <script>var exports = {};</script>
+    <script src="dist/bundle.js"></script>
+    <style>
+        :root {
+            --main-width: 20px;
+            --main-holder-width: calc(var(--main-width)*11);
+            --margin-player: calc(100% - var(--main-holder-width))
+        }
+
+        * {
+            font-family: 'Mali', cursive;
+            font-size: 30px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .bPlayerRight {
+            position: absolute;
+            left: calc(var(--main-holder-width)*0.7);
+            top: calc(var(--main-holder-width)*0.2);
+            width: var(--main-holder-width);
+        }
+
+        .dPlayerRight {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            width: var(--main-width);
+            height: var(--main-width);
+            float: left;
+        }
+
+        #bBot {
+            font-size: 0;
+            width: var(--main-holder-width);
+            position: absolute;
+            left: calc(var(--main-holder-width)*2.7);
+            top: calc(var(--main-holder-width)*0.2);
+        }
+
+        .whiteField-1 {
+            border: 1px solid black;
+            width: var(--main-width);
+            height: var(--main-width);
+            display: inline-block;
+        }
+
+        .whiteField-2 {
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            width: var(--main-width);
+            height: var(--main-width);
+            display: inline-block;
+        }
+
+        .whiteField-3 {
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            width: var(--main-width);
+            height: var(--main-width);
+            display: inline-block;
+        }
+
+        .whiteField-4 {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            width: var(--main-width);
+            height: var(--main-width);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: inline-block;
+        }
+
+        .g::after {
+            content: "";
+            width: var(--main-width);
+            height: 2px;
+            position: absolute;
+            background-color: black;
+            transform: translateY(calc(var(--main-width)/2)) rotate(-45deg);
+        }
+
+        .g::before {
+            content: "";
+            width: var(--main-width);
+            height: 2px;
+            background-color: black;
+            position: absolute;
+            transform: translateY(calc(var(--main-width)/2)) rotate(45deg);
+        }
+
+        .bPlayerLeft {
+            margin: 20px;
+            margin-top: 0;
+            float: left;
+        }
+
+        .dPlayerLeft {
+            border: 1px solid black;
+            border-right: none;
+            width: var(--main-width);
+            height: var(--main-width);
+            display: inline-block;
+        }
+
+        .dPlayerLeft:last-child {
+            border-right: 1px solid black;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .red {
+            background-color: red
+        }
+
+        .gracz {
+            position: absolute;
+            left: calc(var(--main-holder-width)*0.7);
+            top: 0;
+        }
+
+        .komputer {
+            position: absolute;
+            left: calc(var(--main-holder-width)*2.8);
+            top: 0;
+        }
+
+        .button {
+            position: absolute;
+            left: calc(var(--main-holder-width)*1.8);
+            top: 50%;
+            border-radius: 3px 5px;
+        }
+
+        #ann {
+            position: absolute;
+            left: calc(var(--main-holder-width)*1.9);
+            top: 15%;
+            border: 4px solid black;
+            padding: 10px;
+            border-radius: 10% 20%;
+        }
+
+        #winBox {
+            display: none;
+            position: absolute;
+            left: calc(var(--main-holder-width)*1.75);
+            top: 35%;
+            border: 4px solid black;
+            padding: 10px;
+            border-radius: 10% 20%;
+        }
+
+        .hidder {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            background-color: rgba(192, 192, 192, 0.3);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hidder">
+    </div>
+    <p class="komputer">Bot's Board</p>
+    <p class="gracz">Player's Board</p>
+    <div class="bPlayerLeft"></div>
+    <div id="ann">Player</div>
+
+    <div id="winBox"></div>
+
+</body>
+
+</html>
