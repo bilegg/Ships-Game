@@ -177,7 +177,7 @@ const bPlayerRight = {
                     }
                     break;
             }
-            if (bPlayerLeft.shipTab.length != 0 && bPlayerLeft.pickedShip.className != "") bPlayerLeft.shipDelete(bPlayerLeft.pickedShip)
+            if (bPlayerLeft.shipTab.length != 0 && bPlayerLeft.pickedShip.className != "") bPlayerLeft.ShipDelete(bPlayerLeft.pickedShip)
             this.paintBlue()
         }
 
