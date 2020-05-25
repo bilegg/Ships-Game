@@ -2,4 +2,4 @@
 
 Project made with typescript and webpack
 
-1.
+Just download and have fun :)
