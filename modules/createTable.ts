@@ -1,4 +1,4 @@
-let createTable: (size: number) => number[][] =
+let CreateTable: (size: number) => number[][] =
     function (size: number): number[][] {
         let mainTable: number[][] = []
 
@@ -14,4 +14,4 @@ let createTable: (size: number) => number[][] =
         return mainTable
     };
 
-export default createTable
+export default CreateTable

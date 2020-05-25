@@ -2,16 +2,15 @@ import createTable from './createTable';
 
 const bBot = {
 
-    //* Wylosowanie jedynek (bot)
-    checkSurrounding: function (shipSize: number, propTable: number[][]) {
-        let x: number = 0;
-        let y: number = 0;
-        let index: number = shipSize - 1;
-        let redo: boolean = true;
+    CheckSurrounding: function (shipSize: number, propTable: number[][]) {
+        let x: number = 0
+        let y: number = 0
+        let index: number = shipSize - 1
+        let redo: boolean = true
         let direction_down: boolean = false
 
-        let randomize = function () {
-            //losowanie kierunku
+        let Randomize = function () {
+            // direction randomizer
             if (Math.random() > 0.5) direction_down = true
             else direction_down = false
 
@@ -26,33 +25,32 @@ const bBot = {
                     break;
             }
         }
-        randomize()
+        Randomize()
 
         do {
-            let isOk: boolean = true
+            let checkIfRight: boolean = true
             for (var z = 0; z < shipSize; z++) {
                 if (direction_down) {
                     if (propTable[x + z][y] == 1 || propTable[x + z - 1][y] == 1 || propTable[x + z - 1][y + 1] == 1 || propTable[x + z][y + 1] == 1 || propTable[x + z + 1][y + 1] == 1 ||
                         propTable[x + z + 1][y] == 1 || propTable[x + z + 1][y - 1] == 1 || propTable[x + z][y - 1] == 1 || propTable[x + z - 1][y - 1] == 1) {
-                        isOk = false
+                            checkIfRight = false
                     }
                 }
                 else {
                     if (propTable[x][y + z] == 1 || propTable[x][y + z - 1] == 1 || propTable[x + 1][y + z - 1] == 1 || propTable[x + 1][y + z] == 1 || propTable[x + 1][y + z + 1] == 1 ||
                         propTable[x][y + z + 1] == 1 || propTable[x - 1][y + z + 1] == 1 || propTable[x - 1][y + z] == 1 || propTable[x - 1][y + z - 1] == 1) {
-                        isOk = false
+                            checkIfRight = false
                     }
                 }
             }
 
-            //Wyjście z pętli
-            if (isOk == false) randomize()
+            if (checkIfRight == false) Randomize()
             else redo = false
 
         } while (redo)
 
 
-        let recur = function (times: number): boolean {
+        let Recur = function (times: number): boolean {
             if (times < 0) {
                 return true
             }
@@ -91,10 +89,10 @@ const bBot = {
                 }
                 index = index - 1
 
-                return recur(index)
+                return Recur(index)
             }
         }
-        recur(index)
+        Recur(index)
 
         return propTable
 
@@ -103,19 +101,19 @@ const bBot = {
     writeOnes: function (): number[][] {
         let mainTable: any = createTable(12)
 
-        //wstawianie 4-masztowca
+        // 4-sized ship
         mainTable = this.checkSurrounding(4, mainTable)
 
-        //wstawianie 3-masztowców
+        // 3-sized ships
         mainTable = this.checkSurrounding(3, mainTable)
         mainTable = this.checkSurrounding(3, mainTable)
 
-        //wstawianie 2-masztowców
+        // 2-sized ship
         mainTable = this.checkSurrounding(2, mainTable)
         mainTable = this.checkSurrounding(2, mainTable)
         mainTable = this.checkSurrounding(2, mainTable)
 
-        //wstawianie 1-masztowców
+        // 1-sized ship
         mainTable = this.checkSurrounding(1, mainTable)
         mainTable = this.checkSurrounding(1, mainTable)
         mainTable = this.checkSurrounding(1, mainTable)

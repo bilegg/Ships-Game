@@ -6,7 +6,7 @@ const bPlayerRight = {
     shipDirection: true, //! true - right, false - down
 
     pickedShip: bPlayerLeft.pickedShip,
-    playerBoard: function (): HTMLDivElement {
+    PlayerBoard: function (): HTMLDivElement {
         let holder = document.createElement("div")
         holder.className = "bPlayerRight"
         let _this = this
@@ -39,7 +39,7 @@ const bPlayerRight = {
 
         return holder
     },
-    rightClick: function (element: HTMLDivElement, shipDirection: boolean) {
+    RightClick: function (element: HTMLDivElement, shipDirection: boolean) {
         let el = element
         this.shipDirection = !this.shipDirection
         shipDirection = !shipDirection
@@ -157,7 +157,7 @@ const bPlayerRight = {
         if (x + this.pickedShip.children.length <= 11 && y + this.pickedShip.children.length <= 11) this.boardHover(true, el, false)
 
     },
-    leftClick: function (element: HTMLDivElement) {
+    LeftClick: function (element: HTMLDivElement) {
         if (bPlayerLeft.shipTab.length == 0) alert("Strzelaj komputerowi nie sobie baranie xd")
 
         let x = Number(element.id.split("_")[1])
@@ -182,7 +182,7 @@ const bPlayerRight = {
         }
 
     },
-    paintBlue: function () {
+    PaintBlue: function () {
         for (let x = 1; x < this.mainTable.length - 1; x++) {
             for (let y = 1; y < this.mainTable.length - 1; y++) {
                 if (this.mainTable[x][y] == 1) document.getElementById(y + "_" + x)!.classList.add("blue")
@@ -190,7 +190,7 @@ const bPlayerRight = {
         }
 
     },
-    boardHover: function (colored: boolean, element: HTMLDivElement, cornerChange: boolean, cornerX?: number, cornerY?: number) {
+    BoardHover: function (colored: boolean, element: HTMLDivElement, cornerChange: boolean, cornerX?: number, cornerY?: number) {
         let _this = this
 
         let x = Number(element.id.split("_")[0])
@@ -233,7 +233,7 @@ const bPlayerRight = {
                 break;
         }
     },
-    canPutShip: function (propX: number, propY: number): boolean {
+    CanPutShip: function (propX: number, propY: number): boolean {
         let y = propX
         let x = propY
 

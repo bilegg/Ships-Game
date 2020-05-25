@@ -1,11 +1,11 @@
 import bBot from './bBot';
-import gameplay from './../losulosu';
+import gameplay from './../main';
 
 const bPlayerLeft = {
     botTab: bBot.writeOnes(),
     shipTab: [4, 3, 3, 2, 2, 2, 1, 1, 1, 1],
     pickedShip: document.createElement("div"),
-    shipCreate: function () {
+    ShipCreate: function () {
         let ships: HTMLDivElement[] = []
 
         //tworzenie divow
@@ -47,7 +47,7 @@ const bPlayerLeft = {
             document.getElementsByClassName("bPlayerLeft")[0].appendChild(ships[i])
         }
     },
-    shipGlow: function (colorUp: boolean, ship: HTMLDivElement) {
+    ShipGlow: function (colorUp: boolean, ship: HTMLDivElement) {
         if (ship.getAttribute("picked") == "false") {
             if (colorUp) for (let i = 0; i < ship.children.length; i++) ship.children[i].setAttribute("style", "background-color:red");
             else for (let i = 0; i < ship.children.length; i++) ship.children[i].setAttribute("style", "background-color:white");
@@ -55,7 +55,7 @@ const bPlayerLeft = {
 
         return ship
     },
-    shipClick: function (ship: HTMLDivElement) {
+    ShipClick: function (ship: HTMLDivElement) {
         for (let i = 0; i < ship.children.length; i++) ship.children[i].setAttribute("style", "background-color:blue");
         ship.setAttribute('picked', 'true');
 
@@ -66,12 +66,12 @@ const bPlayerLeft = {
 
         return ship
     },
-    shipDelete: function (ship: HTMLDivElement) {
+    ShipDelete: function (ship: HTMLDivElement) {
         this.shipTab.splice(this.shipTab.indexOf(ship.children.length), 1)
         this.pickedShip = document.createElement("div")
         document.body.getElementsByClassName("bPlayerLeft")[0].removeChild(ship)
 
-        if (this.shipTab.length == 0) document.body.appendChild(gameplay.button.appendButton())
+        if (this.shipTab.length == 0) document.body.appendChild(gameplay.button.AppendButton())
     }
 }
 

@@ -1,70 +1,51 @@
 import bPlayerLeft from './modules/bPlayerLeft';
 import bPlayerRight from './modules/bPlayerRight';
 import message from './modules/message';
-import Message from './modules/message';
 
-function log(mode: boolean) { // this is the decorator factory
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        if (mode) console.log("Ładnie")
-        else console.log("Gowno")
-    };
-}
+class BuildBoard {  
 
-class buildBoard {
-
-    botBoard: number[][] = bPlayerLeft.botTab
-    playerBoard: number[][] = bPlayerRight.mainTable
-    playerBoardDiv: HTMLDivElement = bPlayerRight.playerBoard()
-    _this = this
-    startGame: boolean = false
+    botBoard: number[][] = bPlayerLeft.botTab;
+    playerBoard: number[][] = bPlayerRight.mainTable;
+    playerBoardDiv: HTMLDivElement = bPlayerRight.PlayerBoard();
+    _this = this;
+    startGame: boolean = false;
 
     constructor(init?: boolean) {
-        if (init) gameplay.startGame = true
+        if (init) gameplay.startGame = true;
     }
 
-    @log(false)
-    useFUCKINGUSELESSDECORATORFFS() {
-        console.log("very usefull")
-    }
+    CreatePage() {
+        let bBot = document.createElement("div");
+        let _this = this;
+        bBot.id = "bBot";
 
-
-    createPage() {
-        let bBot = document.createElement("div")
-        bBot.id = "bBot"
-        let _this = this
-
-        for (let i = 1; i < this.botBoard.length - 1; i++) {
-
+        for (let i = 1; i < this.botBoard.length - 1; i++) {    // creating board
             for (let n = 1; n < this.botBoard[i].length - 1; n++) {
-                let newDiv = document.createElement("div")
-                newDiv.setAttribute('data-used', "false")
-                newDiv.id = i + "_" + n + "_"
+                let newDiv = document.createElement("div");
+                newDiv.setAttribute('data-used', "false");
+                newDiv.id = i + "_" + n + "_";
 
                 newDiv.addEventListener('click', function () {
                     if (newDiv.dataset.used == "false") {
-                        gameplay.oneShot(this.id, true)
+                        gameplay.OneShot(this.id, true);
                     }
                 })
 
-                //tworzenie borderów
-                if (n == 1 && i == 1) newDiv.className = "whiteField-1"
-                else if (n != 1 && i == 1) newDiv.className = "whiteField-2"
-                else if (n == 1 && i != 1) newDiv.className = "whiteField-3"
-                else newDiv.className = "whiteField-4"
+                // border creation
+                if (n == 1 && i == 1) newDiv.className = "whiteField-1" ;
+                else if (n != 1 && i == 1) newDiv.className = "whiteField-2";
+                else if (n == 1 && i != 1) newDiv.className = "whiteField-3";
+                else newDiv.className = "whiteField-4";
 
-                //zamalowanie bloku
-                //if (this.botBoard[i][n] == 1) newDiv.style.backgroundColor = "black"
-                bBot.appendChild(newDiv)
+                bBot.appendChild(newDiv);
             }
 
         }
+        bPlayerLeft.ShipCreate();
 
-        bPlayerLeft.shipCreate()
-
-        document.body.appendChild(bBot)
-        document.body.appendChild(this.playerBoardDiv)
+        document.body.appendChild(bBot);
+        document.body.appendChild(this.playerBoardDiv);
     }
-
 }
 
 
@@ -73,50 +54,47 @@ class buildBoard {
 // * ---------------------------------------------------------------
 const gameplay = {
     startGame: false,
-    currentPlayer: true, // ! true - gracz, false - komputer
-    _buildBoard: new buildBoard(),
+    currentPlayer: true, // ! true - player, false - bot
+    _buildBoard: new BuildBoard(),
     button: {
-        appendButton: function (): HTMLButtonElement {
+        AppendButton: function (): HTMLButtonElement {
             let button = document.createElement('button')
             button.className = "button"
             button.innerHTML = "Start game"
             button.addEventListener('click', function () {
-                gameplay.button.startGame()
+                gameplay.button.StartGame()
             })
 
             return button
         },
-        deleteButton: function (button: HTMLButtonElement) {
+        DeleteButton: function (button: HTMLButtonElement) {
             document.body.removeChild(button)
         },
-        startGame: function () {
-            gameplay.button.deleteButton(document.getElementsByTagName('button')[0])
+        StartGame: function () {
+            gameplay.button.DeleteButton(document.getElementsByTagName('button')[0])
 
             gameplay.startGame = true
         }
     },
-    checkIfWin: function (playerTab: number[][], botTab: number[][]) {
-        let win: boolean;
-        let winner: boolean // player:true
-
-        let noOneBot = true
-        let noOnePlayer = true
+    CheckIfWin: function (playerTab: number[][], botTab: number[][]) {
+        let botHasWon = true
+        let playerHasWon = true
 
         for (let y = 0; y < botTab.length; y++) {
             for (let x = 0; x < botTab[y].length; x++) {
-                if (botTab[y][x] == 1) noOnePlayer = false
-                if (playerTab[y][x] == 1) noOneBot = false
+                if (botTab[y][x] == 1) playerHasWon = false
+                if (playerTab[y][x] == 1) botHasWon = false
             }
         }
 
-        if (noOneBot) {
+        if (botHasWon) {
             setTimeout(function () {
                 document.getElementById("winBox")!.innerHTML = "Bot Won<br>The Game"
                 document.getElementById("winBox")!.style.display = "block"
                 document.getElementsByClassName('hidder')[0].setAttribute("style", "display:block");
             }, 1500)
         }
-        else if (noOnePlayer) {
+        else if (playerHasWon) {
             setTimeout(function () {
                 document.getElementById("winBox")!.innerHTML = "Player Won<br>The Game"
                 document.getElementById("winBox")!.style.display = "block"
@@ -125,7 +103,7 @@ const gameplay = {
         }
 
     },
-    oneShot: function (blockID: string, player: boolean) {
+    OneShot: function (blockID: string, player: boolean) {
         if (bPlayerLeft.shipTab.length == 0 && gameplay.startGame) {
             if (this._buildBoard.botBoard == undefined) this._buildBoard.botBoard = [[1]]
             let x = Number(blockID.split("_")[0])
@@ -133,18 +111,18 @@ const gameplay = {
 
             gameplay.currentPlayer = player
 
-            if (gameplay.currentPlayer) { // tura gracza
+            if (gameplay.currentPlayer) { // player's turn
                 let consoleLogger = new message
 
                 if (this._buildBoard.botBoard[x][y] == 1) {
                     document.getElementById(x + "_" + y + "_")!.classList.add("g");
                     this._buildBoard.botBoard[x][y] = 3
-                    consoleLogger.showMessage(true, true)
+                    consoleLogger.showMessage(true)
                 }
                 else {
                     gameplay._buildBoard.botBoard[x][y] = 3
                     document.getElementById(x + "_" + y + "_")!.style.backgroundColor = 'rgba(192,192,192,0.3)';
-                    consoleLogger.showMessage(true, false)
+                    consoleLogger.showMessage(false)
                 }
 
                 document.getElementById(x + "_" + y + "_")!.dataset.used = "true"
@@ -152,7 +130,7 @@ const gameplay = {
                 document.getElementById('ann')!.innerText = "Bot"
 
                 setTimeout(function () {
-                    gameplay.oneShot(blockID, false)
+                    gameplay.OneShot(blockID, false)
                 }, 1000)
             }
             else {
@@ -183,7 +161,7 @@ const gameplay = {
 
             }
 
-            this.checkIfWin(gameplay._buildBoard.playerBoard, gameplay._buildBoard.botBoard)
+            this.CheckIfWin(gameplay._buildBoard.playerBoard, gameplay._buildBoard.botBoard)
         }
     }
 }
@@ -192,11 +170,10 @@ const gameplay = {
 
 export default gameplay
 
-// * Inicjacja 
+// * Initialization 
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    let divBoard = new buildBoard
+    let divBoard = new BuildBoard;
 
-    divBoard.createPage()
-
+    divBoard.CreatePage();
 });

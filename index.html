@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Ships - The Game</title>
     <link href="https://fonts.googleapis.com/css?family=Mali" rel="stylesheet">
     <script>var exports = {};</script>
     <script src="dist/bundle.js"></script>
@@ -130,13 +130,13 @@
             background-color: red
         }
 
-        .gracz {
+        .player {
             position: absolute;
             left: calc(var(--main-holder-width)*0.7);
             top: 0;
         }
 
-        .komputer {
+        .bot {
             position: absolute;
             left: calc(var(--main-holder-width)*2.8);
             top: 0;
@@ -184,8 +184,8 @@
 <body>
     <div class="hidder">
     </div>
-    <p class="komputer">Bot's Board</p>
-    <p class="gracz">Player's Board</p>
+    <p class="bot">Bot's Board</p>
+    <p class="player">Player's Board</p>
     <div class="bPlayerLeft"></div>
     <div id="ann">Player</div>
 
