@@ -16,17 +16,17 @@ const bPlayerRight = {
                 singleDiv.id = x + "_" + y
                 singleDiv.classList.add("dPlayerRight");
                 singleDiv.addEventListener("mouseenter", function () {
-                    _this.boardHover(true, singleDiv, false)
+                    _this.BoardHover(true, singleDiv, false)
                 })
                 singleDiv.addEventListener("mouseleave", function () {
-                    _this.boardHover(false, singleDiv, false)
+                    _this.BoardHover(false, singleDiv, false)
                 })
                 singleDiv.addEventListener("contextmenu", function (ev) {
                     ev.preventDefault()
-                    _this.rightClick(singleDiv, bPlayerRight.shipDirection)
+                    _this.RightClick(singleDiv, bPlayerRight.shipDirection)
                 })
                 singleDiv.addEventListener("click", function (ev) {
-                    _this.leftClick(singleDiv)
+                    _this.LeftClick(singleDiv)
                 })
 
                 if (x == 1 && y == 1) singleDiv.setAttribute("style", 'border-left:1px solid black;border-top:1px solid black')
@@ -49,9 +49,6 @@ const bPlayerRight = {
         let x = Number(el.id.split("_")[0])
         let y = Number(el.id.split("_")[1])
 
-        console.log(x, y)
-        console.log(shipDirection)
-
         let tempX: number = x
         let tempY: number = y
 
@@ -62,7 +59,7 @@ const bPlayerRight = {
                     let id = (tempX) + "_" + (tempY + i)
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
-                    if (this.canPutShip(tempX, tempY)) currentDiv.classList.add("green");
+                    if (this.CanPutShip(tempX, tempY)) currentDiv.classList.add("green");
                     else currentDiv.classList.add("red");
                     tempX = x
                     tempY = y
@@ -77,7 +74,7 @@ const bPlayerRight = {
                     let id = (tempX + i) + "_" + (tempY)
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
-                    if (this.canPutShip(tempX, tempY)) currentDiv.classList.add("green");
+                    if (this.CanPutShip(tempX, tempY)) currentDiv.classList.add("green");
                     else currentDiv.classList.add("red");
                     tempX = x
                     tempY = y
@@ -90,7 +87,7 @@ const bPlayerRight = {
                     let id = (tempX) + "_" + (tempY + i)
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
-                    if (this.canPutShip(tempX, tempY)) currentDiv.classList.add("green");
+                    if (this.CanPutShip(tempX, tempY)) currentDiv.classList.add("green");
                     else currentDiv.classList.add("red");
                     tempX = x
                     tempY = y
@@ -105,7 +102,7 @@ const bPlayerRight = {
                     let id = (tempX + i) + "_" + (tempY)
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
-                    if (this.canPutShip(tempX, tempY)) currentDiv.classList.add("green");
+                    if (this.CanPutShip(tempX, tempY)) currentDiv.classList.add("green");
                     else currentDiv.classList.add("red");
                     tempX = x
                     tempY = y
@@ -118,7 +115,7 @@ const bPlayerRight = {
                     let id = (tempX) + "_" + (tempY + i)
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
-                    if (this.canPutShip(tempX, tempY)) currentDiv.classList.add("green");
+                    if (this.CanPutShip(tempX, tempY)) currentDiv.classList.add("green");
                     else currentDiv.classList.add("red");
                     tempX = x
                     tempY = y
@@ -133,7 +130,7 @@ const bPlayerRight = {
                     let id = (tempX + i) + "_" + (tempY)
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
-                    if (this.canPutShip(tempX, tempY)) currentDiv.classList.add("green");
+                    if (this.CanPutShip(tempX, tempY)) currentDiv.classList.add("green");
                     else currentDiv.classList.add("red");
                     tempX = x
                     tempY = y
@@ -146,7 +143,7 @@ const bPlayerRight = {
                     let id = (tempX) + "_" + (tempY + i)
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
-                    if (this.canPutShip(tempX, tempY)) currentDiv.classList.add("green");
+                    if (this.CanPutShip(tempX, tempY)) currentDiv.classList.add("green");
                     else currentDiv.classList.add("red");
                     tempX = x
                     tempY = y
@@ -154,7 +151,7 @@ const bPlayerRight = {
             }
         }
 
-        if (x + this.pickedShip.children.length <= 11 && y + this.pickedShip.children.length <= 11) this.boardHover(true, el, false)
+        if (x + this.pickedShip.children.length <= 11 && y + this.pickedShip.children.length <= 11) this.BoardHover(true, el, false)
 
     },
     LeftClick: function (element: HTMLDivElement) {
@@ -162,7 +159,7 @@ const bPlayerRight = {
 
         let x = Number(element.id.split("_")[1])
         let y = Number(element.id.split("_")[0])
-        if (this.canPutShip(y, x)) {
+        if (this.CanPutShip(y, x)) {
             switch (this.shipDirection) {
                 case true:
                     for (let i = 0; i < this.pickedShip.children.length; i++) {
@@ -178,7 +175,7 @@ const bPlayerRight = {
                     break;
             }
             if (bPlayerLeft.shipTab.length != 0 && bPlayerLeft.pickedShip.className != "") bPlayerLeft.ShipDelete(bPlayerLeft.pickedShip)
-            this.paintBlue()
+            this.PaintBlue()
         }
 
     },
@@ -206,11 +203,11 @@ const bPlayerRight = {
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
                     if (colored) {
-                        if (this.canPutShip(x, y)) currentDiv.classList.add("green");
+                        if (this.CanPutShip(x, y)) currentDiv.classList.add("green");
                         else currentDiv.classList.add("red");
                     }
                     else {
-                        if (this.canPutShip(x, y)) currentDiv.classList.remove("green");
+                        if (this.CanPutShip(x, y)) currentDiv.classList.remove("green");
                         else currentDiv.classList.remove("red");
                     }
                 }
@@ -222,11 +219,11 @@ const bPlayerRight = {
                     let currentDiv: HTMLElement = document.getElementById(id)!
 
                     if (colored) {
-                        if (this.canPutShip(x, y)) currentDiv.classList.add("green");
+                        if (this.CanPutShip(x, y)) currentDiv.classList.add("green");
                         else currentDiv.classList.add("red");
                     }
                     else {
-                        if (this.canPutShip(x, y)) currentDiv.classList.remove("green");
+                        if (this.CanPutShip(x, y)) currentDiv.classList.remove("green");
                         else currentDiv.classList.remove("red");
                     }
                 }

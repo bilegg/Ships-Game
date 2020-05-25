@@ -1,8 +1,8 @@
 import bBot from './bBot';
-import gameplay from './../main';
+import gameplay from './main';
 
 const bPlayerLeft = {
-    botTab: bBot.writeOnes(),
+    botTab: bBot.WriteOnes(),
     shipTab: [4, 3, 3, 2, 2, 2, 1, 1, 1, 1],
     pickedShip: document.createElement("div"),
     ShipCreate: function () {
@@ -19,13 +19,13 @@ const bPlayerLeft = {
                 let div = document.createElement("div")
 
                 div.addEventListener("click", function () {
-                    _this.shipClick(ship)
+                    _this.ShipClick(ship)
                 })
                 div.addEventListener("mouseenter", function () {
-                    _this.shipGlow(true, ship)
+                    _this.ShipGlow(true, ship)
                 })
                 div.addEventListener("mouseleave", function () {
-                    _this.shipGlow(false, ship)
+                    _this.ShipGlow(false, ship)
                 })
                 div.className = "dPlayerLeft"
                 ship.appendChild(div)

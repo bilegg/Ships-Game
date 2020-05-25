@@ -98,26 +98,26 @@ const bBot = {
 
     },
 
-    writeOnes: function (): number[][] {
+    WriteOnes: function (): number[][] {
         let mainTable: any = createTable(12)
 
         // 4-sized ship
-        mainTable = this.checkSurrounding(4, mainTable)
+        mainTable = this.CheckSurrounding(4, mainTable)
 
         // 3-sized ships
-        mainTable = this.checkSurrounding(3, mainTable)
-        mainTable = this.checkSurrounding(3, mainTable)
+        mainTable = this.CheckSurrounding(3, mainTable)
+        mainTable = this.CheckSurrounding(3, mainTable)
 
         // 2-sized ship
-        mainTable = this.checkSurrounding(2, mainTable)
-        mainTable = this.checkSurrounding(2, mainTable)
-        mainTable = this.checkSurrounding(2, mainTable)
+        mainTable = this.CheckSurrounding(2, mainTable)
+        mainTable = this.CheckSurrounding(2, mainTable)
+        mainTable = this.CheckSurrounding(2, mainTable)
 
         // 1-sized ship
-        mainTable = this.checkSurrounding(1, mainTable)
-        mainTable = this.checkSurrounding(1, mainTable)
-        mainTable = this.checkSurrounding(1, mainTable)
-        mainTable = this.checkSurrounding(1, mainTable)
+        mainTable = this.CheckSurrounding(1, mainTable)
+        mainTable = this.CheckSurrounding(1, mainTable)
+        mainTable = this.CheckSurrounding(1, mainTable)
+        mainTable = this.CheckSurrounding(1, mainTable)
 
         return mainTable
     },
