@@ -1,6 +1,6 @@
-import bPlayerLeft from './modules/bPlayerLeft';
-import bPlayerRight from './modules/bPlayerRight';
-import message from './modules/message';
+import bPlayerLeft from './bPlayerLeft';
+import bPlayerRight from './bPlayerRight';
+import message from './message';
 
 class BuildBoard {  
 
